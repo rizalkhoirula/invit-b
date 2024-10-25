@@ -20,11 +20,14 @@ mongoose.connect(process.env.MONGODB_URI, {
 .then(() => console.log('Koneksi ke database berhasil'))
 .catch((error) => console.error('Gagal terhubung ke database:', error));
 
+app.get('/', (req, res) => {
+    res.send('Welcome to the API!');
+});
 
 app.use('/api', undanganRoutes);
 app.use('/api', kehadiranRoutes);
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
     console.log(`Server berjalan di port ${PORT}`);
 });
