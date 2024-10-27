@@ -1,16 +1,13 @@
-
 const nodemailer = require('nodemailer');
 const QRCode = require('qrcode');
 const Undangan = require('../models/undanganModels'); 
 require('dotenv').config();
 
-
-
 const sendEmailWithQRCode = async (name, email, link) => {
     try {
+        // Menghasilkan QR code sebagai Data URL
         const qrCodeData = await QRCode.toDataURL(link);
-        const qrCodePath = await saveQRCode(link);
-        console.log('QR Code saved to:', qrCodePath);
+        console.log('QR Code generated.');
 
         let transporter = nodemailer.createTransport({
             host: 'smtp.zoho.com',
@@ -29,15 +26,9 @@ const sendEmailWithQRCode = async (name, email, link) => {
             html: `
                 <p>Hai ${name},</p>
                 <p>Terima kasih telah mengisi formulir undangan. Silakan gunakan QR code di bawah ini untuk check-in pada hari acara:</p>
+                <p><img src="${qrCodeData}" alt="QR Code" /></p>
                 <p>Kami menunggu kehadiran Anda!</p>
             `,
-            attachments: [
-                {
-                    filename: 'qrcode.png',
-                    path: qrCodePath,
-                    cid: 'qrcode' 
-                }
-            ]
         };
 
         await transporter.sendMail(mailOptions);
@@ -48,6 +39,5 @@ const sendEmailWithQRCode = async (name, email, link) => {
 };
 
 module.exports = {
-    saveQRCode,
     sendEmailWithQRCode
 };
