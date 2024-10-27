@@ -1,19 +1,10 @@
-const fs = require('fs');
-const path = require('path');
+
 const nodemailer = require('nodemailer');
 const QRCode = require('qrcode');
 const Undangan = require('../models/undanganModels'); 
 require('dotenv').config();
 
-const saveQRCode = async (link) => {
-    const qrCodeDir = path.join(__dirname, 'image', 'qrcode');
-    if (!fs.existsSync(qrCodeDir)) {
-        fs.mkdirSync(qrCodeDir, { recursive: true });
-    }
-    const qrCodePath = path.join(qrCodeDir, `${Date.now()}.png`);
-    await QRCode.toFile(qrCodePath, link);
-    return qrCodePath;
-};
+
 
 const sendEmailWithQRCode = async (name, email, link) => {
     try {
