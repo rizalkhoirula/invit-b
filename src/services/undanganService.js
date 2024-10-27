@@ -6,7 +6,7 @@ const createUndangan = async (data) => {
         const undangan = new Undangan(data);
         const savedUndangan = await undangan.save();
 
-        const checkInLink = `http://localhost:3000/api/check-in/${savedUndangan._id}`;
+        const checkInLink = `http://apiinvit.vercel.app/api/check-in/${savedUndangan._id}`;
         await sendEmailWithQRCode(savedUndangan.name, savedUndangan.email, checkInLink);
 
         return savedUndangan;
