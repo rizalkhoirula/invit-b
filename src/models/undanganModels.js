@@ -17,7 +17,14 @@ const UndanganSchema = new mongoose.Schema({
     },
     status: { 
         type: String, 
-        enum: ['Datang', 'pending', 'Tidak Datang'], default: 'pending' 
+        enum: ['Hadir', 'Tidak Hadir'],
+        required: true  
+
+    },
+    Jumlahtamu:{
+        type: String,
+        // enum: ['1', '2', '3', '4'],
+        required: false
     },
     isScanned: { 
         type: Boolean, 

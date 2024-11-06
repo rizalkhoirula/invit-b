@@ -3,7 +3,7 @@ const router = express.Router();
 const kehadiranServices = require('../services/kehadiranService');
 const Undangan = require('../models/undanganModels');
 
-router.get('/check-in/:id', async (req, res) => {  // Ubah dari 'post' ke 'get'
+router.get('/check-in/:id', async (req, res) => {  
     try {
         const undanganId = req.params.id;
         const undangan = await Undangan.findById(undanganId);
