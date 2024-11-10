@@ -58,5 +58,18 @@ router.delete('/kehadiran/:id', async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 });
+router.get('/kehadiran/count', async (req, res) => {
+    try {
+        console.log("Request received for /kehadiran/count");
 
+        // Call the service method to get the count of kehadiran records
+        const count = await kehadiranServices.getKehadiranCount();
+
+        console.log("Sending response with count:", count);
+        res.status(200).json({ count }); // Return the count as a JSON response
+    } catch (error) {
+        console.error('Error in /kehadiran/count route:', error.message);  // Log any errors
+        res.status(500).json({ error: error.message });
+    }
+});
 module.exports = router;

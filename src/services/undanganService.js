@@ -94,7 +94,14 @@ const getAllUcapans = async () => {
         throw new Error('Gagal mendapatkan data ucapan: ' + error.message);
     }
 };
-
+const getUndanganCount = async () => {
+    try {
+        const count = await Undangan.countDocuments(); // Get the count of all undangan
+        return { count };
+    } catch (error) {
+        throw new Error('Gagal mendapatkan count undangan: ' + error.message);
+    }
+};
 module.exports = {
     createUndangan,
     getAllUndangan,
@@ -102,5 +109,6 @@ module.exports = {
     updateUndanganStatus,
     deleteUndangan,
     checkIn,
-    getAllUcapans
+    getAllUcapans,
+    getUndanganCount
 };

@@ -63,11 +63,28 @@ const deleteKehadiran = async (id) => {
         throw new Error('Gagal menghapus kehadiran: ' + error.message);
     }
 };
+const getKehadiranCount = async () => {
+    try {
+        console.log("Fetching all kehadiran records...");
 
+        // Fetch all kehadiran records
+        const kehadiranRecords = await Kehadiran.find();
+
+        // Manually count the number of records
+        const count = kehadiranRecords.length;
+
+        console.log("Total kehadiran count:", count);
+        return count;
+    } catch (error) {
+        console.error('Error in getKehadiranCount:', error.message); // Log the error
+        throw new Error('Gagal mendapatkan data kehadiran: ' + error.message);
+    }
+};
 module.exports = {
     createKehadiran,
     getAllKehadiran,
     getKehadiranById,
     deleteKehadiran,
-    getKehadiranByUndanganId
+    getKehadiranByUndanganId,
+    getKehadiranCount
 };
